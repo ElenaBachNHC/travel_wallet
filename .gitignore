@@ -1,0 +1,41 @@
+# 📦 Environnement virtuel
+env/
+.venv/
+venv/
+
+# 🧪 Données (tout dans data/)
+data/
+data/**
+
+# 📤 Sorties et artefacts
+outputs/
+outputs/**
+
+# 📚 Notebooks et checkpoints
+.ipynb_checkpoints/
+
+# 🧠 Fichiers modèles, arrays, logs
+*.pkl
+*.joblib
+*.npy
+*.npz
+*.log
+*.csv
+*.json
+
+# ⚙️ Python & cache
+__pycache__/
+*.py[cod]
+*.so
+__init__.py
+
+# 🧪 Test files
+tests/__pycache__/
+tests/*.pyc
+
+# ⚙️ VS Code
+.vscode/
+
+# 🗑️ Autres trucs perso
+.DS_Store
+Thumbs.db
