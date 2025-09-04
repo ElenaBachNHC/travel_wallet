@@ -1,0 +1,1 @@
+APP_PASSWORD_HASH = "test"
