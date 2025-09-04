@@ -568,7 +568,8 @@ def ui_create_voyage():
         with col1:
             d0 = st.date_input("Date de début (JST)", value=jst_today())
         with col2:
-            d1 = st.date_input("Date de fin (JST)", value=jst_today() + timedelta(days=6), min_value=d0)
+            default_end = max(jst_today() + timedelta(days=6), d0)
+            d1 = st.date_input("Date de fin (JST)", value=default_end, min_value=d0)
         budget_global = st.number_input("Budget global initial (¥)", min_value=1, step=1)
 
         st.markdown("**Personnes** (liste fermée)")
@@ -787,7 +788,7 @@ def ui_admin(voyage_id: int):
                     conn.execute("DELETE FROM voyages WHERE id=?", (voyage_id,))
                 st.success("Voyage supprimé.")
                 st.session_state.pop("confirm_delete")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Nom incorrect.")
 
