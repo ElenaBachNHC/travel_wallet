@@ -578,30 +578,30 @@ def ui_create_voyage():
         cats_raw = st.text_input("Ex.: Logement:300000, Repas:120000, Transport:100000")
 
         submitted = st.form_submit_button("Créer", type="primary")
-    if submitted:
-        try:
-            personnes = [x.strip() for x in personnes_raw.split(",") if x.strip()]
-            cats = []
-            total_cats = 0
-            for chunk in [x for x in cats_raw.split(",") if x.strip()]:
-                if ":" not in chunk:
-                    st.error(f"Catégorie invalide: '{chunk}' (format attendu nom:budget)")
+        if submitted:
+            try:
+                personnes = [x.strip() for x in personnes_raw.split(",") if x.strip()]
+                cats = []
+                total_cats = 0
+                for chunk in [x for x in cats_raw.split(",") if x.strip()]:
+                    if ":" not in chunk:
+                        st.error(f"Catégorie invalide: '{chunk}' (format attendu nom:budget)")
+                        return
+                    n, b = chunk.split(":", 1)
+                    b = int(b)
+                    if b < 0:
+                        st.error("Budget de catégorie négatif interdit")
+                        return
+                    cats.append({"nom": n.strip(), "budget": b})
+                    total_cats += b
+                if total_cats > budget_global:
+                    st.error("Somme des budgets de catégories > budget global")
                     return
-                n, b = chunk.split(":", 1)
-                b = int(b)
-                if b < 0:
-                    st.error("Budget de catégorie négatif interdit")
-                    return
-                cats.append({"nom": n.strip(), "budget": b})
-                total_cats += b
-            if total_cats > budget_global:
-                st.error("Somme des budgets de catégories > budget global")
-                return
-            voyage_id = create_voyage(nom, d0, d1, int(budget_global), personnes, cats)
-            st.success(f"Voyage créé (id={voyage_id}). Distribution per-diem initialisée.")
-            st.rerun()
-        except Exception as e:
-            st.exception(e)
+                voyage_id = create_voyage(nom, d0, d1, int(budget_global), personnes, cats)
+                st.success(f"Voyage créé (id={voyage_id}). Distribution per-diem initialisée.")
+                st.rerun()
+            except Exception as e:
+                st.exception(e)
 
 
 def ui_voyage_header(v: pd.Series):
