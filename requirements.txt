@@ -1,6 +1,7 @@
 streamlit
-matplotlib
-pandas 
-numpy 
+psycopg2-binary
+sqlalchemy
+pandas
 altair
 bcrypt
+pytz
