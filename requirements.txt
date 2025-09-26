@@ -4,4 +4,5 @@ sqlalchemy
 pandas
 altair
 bcrypt
+supabase
 pytz
