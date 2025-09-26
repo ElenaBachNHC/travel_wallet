@@ -19,7 +19,7 @@ APP_TITLE = "Travel Wallet — Per-day / Per-category (Postgres)"
 JST = pytz.timezone("Asia/Tokyo")
 
 # DATABASE_URL doit être dans st.secrets (Streamlit Cloud) ou variable d'env
-DATABASE_URL = st.secrets["DATABASE_URL"] if hasattr(st, "secrets") else os.getenv("DATABASE_URL")
+DATABASE_URL = "postgresql://postgres:test@db.qbjevrptskhwsqxwpdcw.supabase.co:5432/postgres"
 if not DATABASE_URL:
     st.error("DATABASE_URL manquant dans st.secrets ou variable d'environnement. Ajoute la chaîne de connexion Postgres (Supabase).")
     st.stop()
